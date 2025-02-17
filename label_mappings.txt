@@ -1,0 +1,48 @@
+Mapping for Item_Fat_Content:
+  Low Fat: 1
+  Regular: 2
+
+----------------------------------------
+
+Mapping for Item_Type:
+  Baking Goods: 0
+  Breads: 1
+  Breakfast: 2
+  Canned: 3
+  Dairy: 4
+  Frozen Foods: 5
+  Fruits and Vegetables: 6
+  Hard Drinks: 7
+  Health and Hygiene: 8
+  Household: 9
+  Meat: 10
+  Others: 11
+  Seafood: 12
+  Snack Foods: 13
+  Soft Drinks: 14
+  Starchy Foods: 15
+
+----------------------------------------
+
+Mapping for Outlet_Size:
+  High: 0
+  Medium: 1
+  Small: 2
+
+----------------------------------------
+
+Mapping for Outlet_Location_Type:
+  Tier 1: 0
+  Tier 2: 1
+  Tier 3: 2
+
+----------------------------------------
+
+Mapping for Outlet_Type:
+  Grocery Store: 0
+  Supermarket Type1: 1
+  Supermarket Type2: 2
+  Supermarket Type3: 3
+
+----------------------------------------
+
