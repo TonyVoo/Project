@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Big Mart Sales Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bg-dark-light {
+            background-color: #343a40;
+        }
+        .form-control-dark {
+            background-color: #495057;
+            border: 1px solid #ced4da;
+            color: #f8f9fa;
+        }
+        body {
+            background-color: #e9ecef;
+        }
+        .card {
+            background-color: #212529;
+        }
+        .text-custom {
+            color: #ffc107;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            border: none;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Big Mart Sales</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/view_csv">View CSV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dataset_insight">Dataset Insights</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/analysis">Model Analysis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/predict">Predict</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="text-center text-custom" style="color:black">Big Mart Sales Prediction</h1>
+        <br>
+
+        <div class="card text-white border-0">
+            <div class="card-body">
+                <h2 class="text-center text-custom" style="color:white">Input All Features Here</h2>
+                <form action="/predict" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="Item_Identifier" class="form-label">Item Identifier</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Item_Identifier" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Item_weight" class="form-label">Item Weight</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Item_weight" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Item_Fat_Content" class="form-label">Item Fat Content</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Item_Fat_Content" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Item_visibility" class="form-label">Item Visibility</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Item_visibility" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Item_Type" class="form-label">Item Type</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Item_Type" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Item_MPR" class="form-label">Item MRP</label>
+                            <input type="number" step="any"  class="form-control form-control-dark" name="Item_MPR" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Outlet_identifier" class="form-label">Outlet Identifier</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Outlet_identifier" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Outlet_established_year" class="form-label">Outlet Established Year</label>
+                            <input type="number" class="form-control form-control-dark" name="Outlet_established_year" value="1900" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Outlet_size" class="form-label">Outlet Size</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Outlet_size" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Outlet_location_type" class="form-label">Outlet Location Type</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Outlet_location_type" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Outlet_type" class="form-label">Outlet Type</label>
+                            <input type="number" step="any" class="form-control form-control-dark" name="Outlet_type" required>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-custom btn-lg mt-3 w-100">Predict</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Display Error Messages -->
+                {% if error %}
+                <div class="alert alert-danger text-center mt-4">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <!-- Display Predictions -->
+                {% if predictions %}
+                <div class="text-center mt-5">
+                    <h2 class="text-custom">Predicted Sales</h2>
+                    <table class="table table-dark table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Predicted Sales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for model, value in predictions.items() %}
+                            <tr>
+                                <td>{{ model }}</td>
+                                <td>{{ value }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Display Sales Distribution Plot -->
+                <div class="text-center mt-5">
+                    <h3 class="text-custom">Sales Distribution</h3>
+                    <img src="{{ sales_plot }}" alt="Sales Distribution Plot" class="img-fluid">
+                </div>
+
+                {% if filtered_items %}
+                <div class="mt-5">
+                    <h2 class="text-custom">Items with the same Identifier</h2>
+                    {{ filtered_items | safe }}
+                </div>
+                {% endif %}
+
+                <!-- Display Heatmap -->
+                <div class="text-center mt-5">
+                    <h3 class="text-custom">Feature Correlation Heatmap</h3>
+                    <img src="{{ heatmap }}" alt="Heatmap" class="img-fluid">
+                </div>
+
+                
+
+                <!-- Display Scatter Plots for Strong Correlations -->
+                <div class="text-center mt-5">
+                    <h3 class="text-custom">Strongly Correlated Features</h3>
+                    <img src="{{ correlation_plot }}" alt="Correlation Plot" class="img-fluid">
+                </div>
+                {% endif %}
+
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
