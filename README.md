@@ -2,6 +2,14 @@
 
 This chapter provides step-by-step instructions for installing and running the BigMart Sales Prediction web application from the GitHub repository.
 
+## Objectives
+
+The objectives of this project are:
+
+1. To forecast future sales using a given dataset.
+2. To identify key features that significantly impact the sales of specific products.
+3. To determine the most effective algorithm for accurate sales prediction.
+
 ## Prerequisites
 
 Before proceeding, ensure that the following prerequisites are met:
