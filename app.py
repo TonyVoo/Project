@@ -8,11 +8,13 @@ import prediction
 
 # Load all models
 models = {
-    "Ridge": pickle.load(open("models/Ridge.pkl", "rb")),
-    "DecisionTree": pickle.load(open("models/DecisionTree.pkl", "rb")),
-    "XGBoost": pickle.load(open("models/Xgboost.pkl", "rb")),
-    "Linear": pickle.load(open("models/Linear.pkl", "rb")),
-    "Ada": pickle.load(open("models/Ada.pkl", "rb"))
+    "Best_Gradient_Boosting": pickle.load(open("models/Best_Gradient_Boosting.pkl", "rb")),
+    "Best_Random_Forest": pickle.load(open("models/Best_Random_Forest.pkl", "rb")),
+    "Decision_Tree": pickle.load(open("models/Decision_Tree.pkl", "rb")),
+    "Gradient_Boosting": pickle.load(open("models/Gradient_Boosting.pkl", "rb")),
+    "Linear_Regression": pickle.load(open("models/Linear_Regression.pkl", "rb")),
+    "Random_Forest": pickle.load(open("models/Random_Forest.pkl", "rb")),
+    "XGBoost": pickle.load(open("models/XGBoost.pkl", "rb"))
 }
 
 # Load dataset
